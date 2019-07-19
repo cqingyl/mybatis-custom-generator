@@ -59,6 +59,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import javax.validation.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
@@ -76,18 +77,21 @@ public class RmcUserReg implements Serializable {
     /**
      * ID
      */
+    @NotBlank(message = "ID不能为空")
     @ApiModelProperty(value = "ID")
     private String id;
 
     /**
      * 登陆密码
      */
+    @NotBlank(message = "登陆密码不能为空")
     @ApiModelProperty(value = "登陆密码")
     private String password;
 
     /**
      * 姓名
      */
+    @NotBlank(message = "姓名不能为空")
     @ApiModelProperty(value = "姓名")
     private String name;
 
