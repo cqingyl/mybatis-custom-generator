@@ -58,6 +58,9 @@ public class SwaggerPlugin extends PluginAdapter {
         String remarks = introspectedColumn.getRemarks();
         // 添加swagger实体字段说明
         field.addAnnotation("@ApiModelProperty(value = \"" + remarks + "\")");
+        if (!introspectedColumn.isNullable()) {
+            field.addAnnotation("@NotBlank(message = \""+remarks+"不能为空\")");
+        }
 
         return true;
     }
@@ -83,6 +86,9 @@ public class SwaggerPlugin extends PluginAdapter {
         // 添加swagger包
         topLevelClass.addImportedType("io.swagger.annotations.ApiModel");
         topLevelClass.addImportedType("io.swagger.annotations.ApiModelProperty");
+
+        // 不能为空判断
+        topLevelClass.addImportedType("javax.validation.constraints.NotBlank");
 
         //获取实体类名称
         String entityName = introspectedTable.getFullyQualifiedTable().getDomainObjectName();
