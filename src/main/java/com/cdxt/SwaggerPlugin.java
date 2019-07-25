@@ -58,7 +58,7 @@ public class SwaggerPlugin extends PluginAdapter {
         String remarks = introspectedColumn.getRemarks();
         // 添加swagger实体字段说明
         field.addAnnotation("@ApiModelProperty(value = \"" + remarks + "\")");
-        if (!introspectedColumn.isNullable()) {
+        if (!introspectedColumn.isNullable() && !introspectedColumn.getActualColumnName().equals("ID")) {
             field.addAnnotation("@NotBlank(message = \""+remarks+"不能为空\")");
         }
 
